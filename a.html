@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Android Contacts</title>
+</head>
+<body>
+  <h1>Android Contacts</h1>
+  <ul id="contact-list"></ul>
+
+  <script>
+    // Request permission to access contacts
+    navigator.permissions.query({ name: 'contacts' }).then(result => {
+      if (result.state === 'granted' || result.state === 'prompt') {
+        // Access contacts
+        navigator.contacts.select(['name', 'email', 'phone']).then(contacts => {
+          displayContacts(contacts);
+        }).catch(error => {
+          console.error('Error accessing contacts:', error);
+        });
+      } else {
+        console.error('Permission to access contacts denied.');
+      }
+    });
+
+    // Display contacts on the page
+    function displayContacts(contacts) {
+      const contactList = document.getElementById('contact-list');
+
+      contacts.forEach(contact => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Name: ${contact.name}, Email: ${contact.email}, Phone: ${contact.phone}`;
+        contactList.appendChild(listItem);
+      });
+    }
+  </script>
+</body>
+</html>
