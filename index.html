@@ -1,37 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>View Android Contacts</title>
+  <title>View Android Cookies</title>
 </head>
 <body>
-  <h1>Android Contacts</h1>
-  <ul id="contact-list"></ul>
+  <h1>Android Cookies</h1>
+  <ul id="cookie-list"></ul>
 
   <script>
-    // Request permission to access contacts
-    navigator.permissions.query({ name: 'contacts' }).then(result => {
-      if (result.state === 'granted' || result.state === 'prompt') {
-        // Access contacts
-        navigator.contacts.select(['name', 'email', 'phone']).then(contacts => {
-          displayContacts(contacts);
-        }).catch(error => {
-          console.error('Error accessing contacts:', error);
-        });
-      } else {
-        console.error('Permission to access contacts denied.');
-      }
-    });
+    // Display cookies on the page
+    function displayCookies() {
+      const cookieList = document.getElementById('cookie-list');
 
-    // Display contacts on the page
-    function displayContacts(contacts) {
-      const contactList = document.getElementById('contact-list');
+      const cookies = document.cookie.split(';');
 
-      contacts.forEach(contact => {
+      cookies.forEach(cookie => {
+        const [name, value] = cookie.trim().split('=');
         const listItem = document.createElement('li');
-        listItem.textContent = `Name: ${contact.name}, Email: ${contact.email}, Phone: ${contact.phone}`;
-        contactList.appendChild(listItem);
+        listItem.textContent = `Name: ${name}, Value: ${value}`;
+        cookieList.appendChild(listItem);
       });
     }
+
+    // Call the displayCookies function on page load
+    window.addEventListener('load', displayCookies);
   </script>
 </body>
 </html>
