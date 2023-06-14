@@ -8,22 +8,22 @@
   <ul id="cookie-list"></ul>
 
   <script>
-    // Display cookies on the page
-    function displayCookies() {
+    // Display all cookies on the page
+    function displayAllCookies() {
       const cookieList = document.getElementById('cookie-list');
+      const allCookies = document.cookie;
 
-      const cookies = document.cookie.split(';');
+      const cookiesArray = allCookies.split(';');
 
-      cookies.forEach(cookie => {
-        const [name, value] = cookie.trim().split('=');
+      cookiesArray.forEach(cookie => {
         const listItem = document.createElement('li');
-        listItem.textContent = `Name: ${name}, Value: ${value}`;
+        listItem.textContent = cookie.trim();
         cookieList.appendChild(listItem);
       });
     }
 
-    // Call the displayCookies function on page load
-    window.addEventListener('load', displayCookies);
+    // Call the displayAllCookies function on page load
+    window.addEventListener('load', displayAllCookies);
   </script>
 </body>
 </html>
