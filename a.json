@@ -1,1 +1,8 @@
-
+{
+  "dbname": {
+    "unicid": {
+      "key1": "vi",
+      "key2": "vii"
+    }
+  }
+}
